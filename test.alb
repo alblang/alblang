@@ -1,0 +1,30 @@
+/* comment */
+// comment
+class Hi
+	def self
+		p = new Int
+		f = new Int
+		if p = f
+			f <- new Int
+			return +123.456e+456
+		else
+			return -1.04e-023
+		end
+	end
+	private def prueba
+		for algo
+			if algo
+				return algo
+			else
+				continue
+			end
+		end
+
+	end
+end
+
+class H inherits 
+	def self
+		print 'hello'
+	end
+end
