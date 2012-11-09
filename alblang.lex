@@ -40,9 +40,28 @@ COMMENT "//"
     printf("assign : %s\n", yytext);
 }
 
-class|inherits|def|end|return|if|else|for|while|do|switch|case|break|continue|void|public|private|protected|new {
-    printf("keyword : %s\n", yytext);
-}
+"class" { return CLASS; }
+"inherits" { return INHERITS; }
+"def" { return DEF; }
+"end" { return END; }
+
+"return" { return RETURN; }
+"if" { return IF; }
+"else" { return ELSE; }
+"for" { return FOR; }
+"while" { return WHILE; }
+"do" { return DO; }
+"switch" { return SWITCH; }
+"case" { return CASE; }
+"break" { return BREAK; }
+"continue" { return CONTINUE; }
+"void" { return VOID; }
+"public" { return PUBLIC; }
+"private" { return PRIVATE; }
+"protected" { return PROTECTED; }
+"new" { return NEW; }
+"false" { return BOOLEAN; }
+"true" { return BOOLEAN; }
 
 "+"|"-"|"*"|"/" { 
     printf("operator : %s\n", yytext);
@@ -72,5 +91,6 @@ int main( int argc, char **argv ) {
         yyin = fopen( argv[0], "r" );
     else
         yyin = stdin;
-    yylex();
+    yyparse();
+    yylex();    
 }
