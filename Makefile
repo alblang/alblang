@@ -22,7 +22,7 @@ all:
 
 .PHONY : test
 test: all
-	#...
+	./src/alblang test.alb
 
 .PHONY : clean
 clean:
