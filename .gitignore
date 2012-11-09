@@ -40,3 +40,5 @@ alblang.sublime-project
 alblang.sublime-workspace
 alblang.tab.c
 alblang.tab.h
+alblang
+lex.yy.c
