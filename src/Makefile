@@ -4,7 +4,7 @@
 all:
 	bison -d alblang.y 
 	flex alblang.lex
-	cc -o $@ alblang.tab.c lex.yy.c -lfl
+	cc -o alblang alblang.tab.c lex.yy.c -lfl
 
 #testing
 #	./alblang test.alb
