@@ -1,0 +1,20 @@
+program : class
+
+class 	: CLASS type definition END
+		  CLASS type INHERITS type definition END
+
+type 	: TYPE 
+
+definition : (empty)
+			 definition definition			  
+			 DEF IDENTIFIER expression END
+
+expression	: expression expression
+			  (empty)
+			  IDENTIFIER EQUAL NUMBER
+
+----
+stmt 	: stmt stmt
+		  EMPTY
+
+IF 		  

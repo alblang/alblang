@@ -21,8 +21,8 @@ all:
 	@$(MAKE) -C src
 
 .PHONY : test
-test: all
-	./src/alblang test.alb
+test: 
+	./src/alblang test/test.alb
 
 .PHONY : clean
 clean:
