@@ -1,0 +1,34 @@
+// comment
+
+def ?(i:int)
+	return self?
+end
+
+def nothing
+
+end
+
+def ?(i:int): i
+
+def ?: nil
+
+def method_name (val:int, vals...):
+	#...
+end
+
+(var:Int) def function_name(var:Int, var:String)
+	//...
+end
+
+(var:?) def function_name(var:Int, var:String)
+	//...
+end
+
+// return type void
+def function_name(var:Int, var:String)
+	//...
+end
+
+
+// overload of operators: ?, =, ==, <, >, =<, >=
+// wildcard name: # or ?? 
