@@ -8,3 +8,9 @@ all:
 
 #testing
 #	./alblang test.alb
+
+.PHONY : clean
+clean:
+	rm -rf lex.yy.c
+	rm -rf alblang.tab.c
+	rm -rf alblang.tab.h

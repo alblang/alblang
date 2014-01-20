@@ -92,5 +92,5 @@ int main( int argc, char **argv ) {
     else
         yyin = stdin;
     yyparse();
-    yylex();    
+    //yylex();    
 }
