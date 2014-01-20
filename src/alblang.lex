@@ -1,6 +1,6 @@
 /* 
  * Scanner for Alblang Programming language 
- * Copyright (C) 2012 Jesús Navarrete <jenaiz@alblang.org>
+ * Copyright (C) 2013 Jesús Navarrete <jenaiz@alblang.org>
  * Read the LICENSE file
  */
 
