@@ -7,23 +7,26 @@
 
 #include <editline/readline.h>
 
+mpc_parser_t* Number;
+mpc_parser_t* Symbol; 
+mpc_parser_t* Sexpr; 
+mpc_parser_t* Qexpr;  
+mpc_parser_t* Expr;  
+mpc_parser_t* Alblang;
+
 void init() {
   puts("alb v0.0.1");
   puts("Ctrl + c to exit.");
 }
 
-int main(int argc, char** argv) {
-  
-  lenv* e = lenv_new();
-  lenv_add_builtins(e);
-
-  /* Create Some Parsers */
-  mpc_parser_t* Number   = mpc_new("number");
-  mpc_parser_t* Symbol   = mpc_new("symbol");
-  mpc_parser_t* Sexpr    = mpc_new("sexpr");
-  mpc_parser_t* Qexpr    = mpc_new("qexpr");
-  mpc_parser_t* Expr     = mpc_new("expr");
-  mpc_parser_t* Alblang = mpc_new("alblang");
+void create_parsers() {
+    /* Create Some Parsers */
+  Number   = mpc_new("number");
+  Symbol   = mpc_new("symbol");
+  Sexpr    = mpc_new("sexpr");
+  Qexpr    = mpc_new("qexpr");
+  Expr     = mpc_new("expr");
+  Alblang = mpc_new("alblang");
 
   /* Define them with the following Language */
   mpca_lang(MPC_LANG_DEFAULT,
@@ -36,6 +39,19 @@ int main(int argc, char** argv) {
       alblang  : /^/ <expr>* /$/ ;                       \
     ",
     Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
+}
+
+void cleanup_parsers() {
+  mpc_cleanup(6, Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
+}
+
+int main(int argc, char** argv) {
+  
+  lenv* e = lenv_new();
+  lenv_add_builtins(e);
+
+  create_parsers();
+  
   init();
   
   while(1) {
@@ -59,7 +75,7 @@ int main(int argc, char** argv) {
   }
 
   /* Undefine and Delete our Parsers */
-  mpc_cleanup(6, Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
+  cleanup_parsers();
   
   return 0;
 }
