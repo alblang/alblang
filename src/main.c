@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
   mpc_parser_t* Sexpr    = mpc_new("sexpr");
   mpc_parser_t* Qexpr    = mpc_new("qexpr");
   mpc_parser_t* Expr     = mpc_new("expr");
-  mpc_parser_t* Microlisp = mpc_new("microlisp");
+  mpc_parser_t* Alblang = mpc_new("alblang");
 
   /* Define them with the following Language */
   mpca_lang(MPC_LANG_DEFAULT,
@@ -58,9 +58,9 @@ int main(int argc, char** argv) {
       sexpr  : '(' <expr>* ')' ;                           \
       qexpr  : '{' <expr>* '}' ;                           \
       expr   : <number> | <symbol> | <sexpr> | <qexpr> ;   \
-      microlisp  : /^/ <expr>* /$/ ;                       \
+      alblang  : /^/ <expr>* /$/ ;                       \
     ",
-    Number, Symbol, Sexpr, Qexpr, Expr, Microlisp);
+    Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
   init();
   
   while(1) {
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
   }
 
   /* Undefine and Delete our Parsers */
-  mpc_cleanup(6, Number, Symbol, Sexpr, Qexpr, Expr, Microlisp);
+  mpc_cleanup(6, Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
   
   return 0;
 }
