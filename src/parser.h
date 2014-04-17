@@ -1,6 +1,13 @@
 /* Functions interfaces */
 #include <stdlib.h>
 
+extern mpc_parser_t* Number;
+extern mpc_parser_t* Symbol; 
+extern mpc_parser_t* Sexpr; 
+extern mpc_parser_t* Qexpr;  
+extern mpc_parser_t* Expr;  
+extern mpc_parser_t* Alblang;
+
 /* Forward Declarations */
 struct lval;
 struct lenv;
@@ -11,6 +18,10 @@ typedef struct lenv lenv;
 enum { LVAL_ERR, LVAL_NUM, LVAL_SYM, LVAL_FUN, LVAL_SEXPR, LVAL_QEXPR };
 
 typedef lval*(*lbuiltin)(lenv*, lval*);
+
+void create_parsers();
+void parser_execute(lenv* env, char* input);
+void cleanup_parsers();
 
 lval* lval_num(long x);
 lval* lval_err(char* fmt, ...);
