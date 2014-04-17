@@ -1,0 +1,4 @@
+- fix the parser error
+- read from a code file
+- compile a function
+- print hello world
