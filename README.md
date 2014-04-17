@@ -8,4 +8,5 @@ COPYING
 
 See the file COPYING.
 
-Copyright (c) 2013 Jesús Navarrete <jenaiz@alblang.org>, released under the GPLv2 license
+
+Copyright (c) 2012-2013 Jesús Navarrete <jenaiz@alblang.org>, released under the GPLv2 license

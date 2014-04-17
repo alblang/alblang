@@ -1,6 +1,7 @@
 /* comment */
 // comment
-class Hi
+class Test inherits HiClass
+
 	def self
 		p = new Int
 		f = new Int
@@ -11,6 +12,7 @@ class Hi
 			return -1.04e-023
 		end
 	end
+
 	private def prueba
 		for algo
 			if algo
@@ -20,11 +22,5 @@ class Hi
 			end
 		end
 
-	end
-end
-
-class H inherits 
-	def self
-		print 'hello'
 	end
 end

@@ -72,12 +72,23 @@ COMMENT "//"
 }
 
 {IDENTIFIER} {
-    printf("identifier : %s\n", yytext); 
+    printf("identifier : %s\n", yytext);
+    //struct symtab *sp = symlook(yytext);
+    //yylval.id = sp;
+    return IDENTIFIER;
 }
 
-{NUMBER} { printf("number : %s\n", yytext); }
+{NUMBER} { 
+    printf("number : %s\n", yytext);
+    //yylval.val = atof(yytext);
+    return NUMBER;
+ }
 
-{FLOAT} { printf("float : %s\n", yytext); }
+{FLOAT} { 
+    printf("float : %s\n", yytext); 
+    //yylval.val = atof(yytext);
+    return FLOAT;
+}
 
 \n      { printf("EOL \n"); }
 
