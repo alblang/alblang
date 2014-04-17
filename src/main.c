@@ -7,6 +7,11 @@
 
 #include <editline/readline.h>
 
+void init() {
+  puts("alb v0.0.1");
+  puts("Ctrl + c to exit.");
+}
+
 mpc_parser_t* Number;
 mpc_parser_t* Symbol; 
 mpc_parser_t* Sexpr; 
@@ -14,13 +19,8 @@ mpc_parser_t* Qexpr;
 mpc_parser_t* Expr;  
 mpc_parser_t* Alblang;
 
-void init() {
-  puts("alb v0.0.1");
-  puts("Ctrl + c to exit.");
-}
-
+/* Create Some Parsers */
 void create_parsers() {
-    /* Create Some Parsers */
   Number   = mpc_new("number");
   Symbol   = mpc_new("symbol");
   Sexpr    = mpc_new("sexpr");
@@ -41,6 +41,21 @@ void create_parsers() {
     Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
 }
 
+void parser_execute(lenv* env, char* input) {
+  mpc_result_t r;
+    if (mpc_parse("<stdin>", input, Alblang, &r)) {      
+      lval* x = lval_eval(env, lval_read(r.output));
+      lval_println(x);
+      lval_del(x);
+      
+      mpc_ast_delete(r.output);
+    } else {
+      mpc_err_print(r.error);
+      mpc_err_delete(r.error);
+    }
+}
+
+/* Undefine and Delete our Parsers */
 void cleanup_parsers() {
   mpc_cleanup(6, Number, Symbol, Sexpr, Qexpr, Expr, Alblang);
 }
@@ -59,22 +74,11 @@ int main(int argc, char** argv) {
 
     add_history(input);
     
-    mpc_result_t r;
-    if (mpc_parse("<stdin>", input, Alblang, &r)) {      
-      lval* x = lval_eval(e, lval_read(r.output));
-      lval_println(x);
-      lval_del(x);
-      
-      mpc_ast_delete(r.output);
-    } else {
-      mpc_err_print(r.error);
-      mpc_err_delete(r.error);
-    }
+    parser_execute(e, input);
 
     free(input);
   }
 
-  /* Undefine and Delete our Parsers */
   cleanup_parsers();
   
   return 0;
