@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
   init();
   
   while(1) {
-    char* input = readline("µL >> ");
+    char* input = readline("alb >> ");
 
     add_history(input);
     
