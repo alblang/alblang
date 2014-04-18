@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 
     free(input);
   }
-
+  
   cleanup_parsers();
   
   return 0;
