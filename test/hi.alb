@@ -1,6 +1,8 @@
-class Hi
-	def self
-		/* comment... */
-		print "hi, world!"
-	end
-end
+;class Hi
+;	def self
+;		/* comment... */
+;		print "hi, world!"
+;	end
+;end
+
+print "hello"
