@@ -575,7 +575,6 @@ lval* builtin_load(lenv* e, lval* a) {
   /* Parse File given by string name */
   mpc_result_t r;
   if (mpc_parse_contents(a->cell[0]->str, Alblang, &r)) {
-    
     /* Read contents */
     lval* expr = lval_read(r.output);
     mpc_ast_delete(r.output);
