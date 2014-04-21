@@ -28,3 +28,6 @@ test:
 clean:
 	@$(MAKE) clean -C src
 
+.PHONY : launch
+launch:
+	./bin/alblang

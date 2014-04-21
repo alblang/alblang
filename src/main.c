@@ -7,7 +7,7 @@
 #include <editline/readline.h>
 
 void init() {
-  puts("alb v0.0.1");
+  puts("alblang v0.0.1");
   puts("Ctrl + c to exit.");
 }
 
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     init();
   
     while(1) {
-      char* input = readline("alb >> ");
+      char* input = readline(":>  ");
 
       add_history(input);
       
