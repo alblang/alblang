@@ -18,19 +18,30 @@ int main(int argc, char** argv) {
 
   create_parsers();
   
-  init();
+  /* Interactive Prompt */
+  if (argc == 1) {
+    init();
   
-  while(1) {
-    char* input = readline("alb >> ");
+    while(1) {
+      char* input = readline("alb >> ");
 
-    add_history(input);
-    
-    parser_execute(e, input);
+      add_history(input);
+      
+      parser_execute(e, input);
 
-    free(input);
+      free(input);
+    }
+
+
+  } 
+  
+  /* Supplied with list of files */
+  if (argc >= 2) {
+  
+    parser_execute_files(e, argc, argv);
   }
-  
+
   cleanup_parsers();
-  
+
   return 0;
 }
