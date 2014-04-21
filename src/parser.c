@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "mpc.h"
+#include "parser.h"
 
 mpc_parser_t* Number; 
 mpc_parser_t* Symbol; 
@@ -12,16 +13,8 @@ mpc_parser_t* Qexpr;
 mpc_parser_t* Expr; 
 mpc_parser_t* Alblang;
 
-/* Forward Declarations */ 
-struct lval;
-struct lenv;
-typedef struct lval lval;
-typedef struct lenv lenv;
-
 /* Lisp Value */
 enum { LVAL_ERR, LVAL_NUM, LVAL_SYM, LVAL_STR, LVAL_FUN, LVAL_SEXPR, LVAL_QEXPR };
-
-typedef lval*(*lbuiltin)(lenv*, lval*);
 
 struct lval {
   int type;
@@ -85,8 +78,6 @@ lval* lval_builtin(lbuiltin func) {
   return v;
 }
 
-lenv* lenv_new(void);
-
 lval* lval_lambda(lval* formals, lval* body) {
   lval* v = malloc(sizeof(lval));
   v->type = LVAL_FUN;  
@@ -113,8 +104,6 @@ lval* lval_qexpr(void) {
   return v;
 }
 
-void lenv_del(lenv* e);
-
 void lval_del(lval* v) {
 
   switch (v->type) {
@@ -140,8 +129,6 @@ void lval_del(lval* v) {
   
   free(v);
 }
-
-lenv* lenv_copy(lenv* e);
 
 lval* lval_copy(lval* v) {
   lval* x = malloc(sizeof(lval));
@@ -202,8 +189,6 @@ lval* lval_take(lval* v, int i) {
   lval_del(v);
   return x;
 }
-
-void lval_print(lval* v);
 
 void lval_print_expr(lval* v, char open, char close) {
   putchar(open);
@@ -384,8 +369,6 @@ void lenv_def(lenv* e, lval* k, lval* v) {
 #define LASSERT_NOT_EMPTY(func, args, index) \
   LASSERT(args, args->cell[index]->count != 0, \
     "Function '%s' passed {} for argument %i.", func, index);
-
-lval* lval_eval(lenv* e, lval* v);
 
 lval* builtin_lambda(lenv* e, lval* a) {
   LASSERT_NUM("\\", a, 2);
