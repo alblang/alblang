@@ -16,18 +16,15 @@
 # this program; if not, write to the Free Software Foundation, Inc., 59 Temple 
 # Place, Suite 330, Boston, MA 02111-1307 USA
 
-.PHONY : all
+.PHONY : test
 all:
 	@$(MAKE) -C src
 
-.PHONY : test
 test: 
-	./bin/alblang test/test.alb
+	./bin/alblang test/hi.lsp
 
-.PHONY : clean
 clean:
 	@$(MAKE) clean -C src
 
-.PHONY : launch
 launch:
 	./bin/alblang

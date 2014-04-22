@@ -5,14 +5,12 @@ LFLAGS=-ledit -lm
 LIBS=parser.c mpc.c
 SOURCES=main.c
 
-.PHONY : all
 all: clean 
 	#bison -d alblang.y 
 	#flex alblang.lex 
 	#cc -o alblang alblang.tab.c lex.yy.c -lfl
 	$(CC) $(CFLAGS) main.c $(LIBS) $(LFLAGS) -o ../bin/alblang
 
-.PHONY : clean
 clean:
 	#rm -rf lex.yy.c
 	#rm -rf alblang.tab.c
