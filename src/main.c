@@ -7,7 +7,7 @@
 #include <editline/readline.h>
 
 void init() {
-  puts("alblang v0.0.1");
+  puts("alblang v0.1");
   puts("Ctrl + c to exit.");
 }
 
