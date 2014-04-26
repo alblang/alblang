@@ -816,7 +816,7 @@ void create_parsers() {
     "                                              \
       symbol  : /[a-zA-Z0-9_+\\-*\\/\\\\=<>!&]+/ ; \
       string  : /\"(\\\\.|[^\"])*\"/ ;             \
-      comment : /;[^\\r\\n]*/ ;                    \
+      comment : /#[^\\r\\n]*/ ;                    \
       sexpr   : '(' <expr>* ')' ;                  \
       qexpr   : '{' <expr>* '}' ;                  \
       expr    : <number>  | <symbol> | <string>    \
