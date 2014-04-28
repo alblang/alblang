@@ -7,11 +7,15 @@ How to compile?
 
 You only need to execute:
 
-*make all*
+```
+make all
+```
 
 and you will find the executable in the bin directory:
 
-*./bin/alblang*
+```
+./bin/alblang
+```
 
 Enjoy it!
 
