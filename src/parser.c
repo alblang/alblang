@@ -27,13 +27,13 @@ void create_parsers() {
 
   /* Define them with the following Language */
   mpca_lang(MPCA_LANG_DEFAULT,
-    "                                              \
-      integer  : /[0-9]+/ ; \
-      identifier  : /[a-zA-Z]+/ ; \
-      operator  : /[+\\-*\\/=<>!&]+/ ;  \
-      comment : /#[^\\r\\n]*/ ;                    \
-      expr    : '(' <expr>* ')' | <integer>  | <identifier> | <comment> | <operator>;    \
-      alblang : /^/ <expr>* /$/ ;               \
+    "                                                                                   \
+      integer  : /[0-9]+/ ;                                                             \
+      identifier  : /[a-zA-Z]+/ ;                                                       \
+      operator  : /[+\\-*\\/=<>!&]+/ ;                                                  \
+      comment : /#[^\\r\\n]*/ ;                                                         \
+      expr    : '(' <expr>* ')' | <integer>  | <identifier> | <comment> | <operator>;   \
+      alblang : /^/ <expr>* /$/ ;                                                       \
     ",
     Integer, Identifier, Operator, Comment, Expr, Alblang);
 }
