@@ -50,6 +50,16 @@ void parser_execute(char* input) {
       mpc_err_delete(r.error);
     }
 }
+void parser_execute_file(char* file_name) {
+  mpc_result_t r;
+  if (mpc_parse_contents(file_name, Alblang, &r)) {
+    mpc_ast_print(r.output);
+    mpc_ast_delete(r.output);
+  } else {
+    mpc_err_print(r.error);
+    mpc_err_delete(r.error);
+  }
+}
 
 /* Undefine and Delete our Parsers */
 void cleanup_parsers() {

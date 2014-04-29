@@ -11,4 +11,5 @@ extern mpc_parser_t* Alblang;
 void init();
 void create_parsers();
 void parser_execute(char* input);
+void parser_execute_file(char* file_name);
 void cleanup_parsers();
