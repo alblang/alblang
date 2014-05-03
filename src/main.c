@@ -19,12 +19,19 @@ int main(int argc, char** argv) {
   } else {    
     while(1) {
       char* input = readline(":>  ");
-      puts("add_history....");
+      
       add_history(input);
-      puts("parser_execute....");
-      parser_execute(input);
+      
+      if (strcmp(input, "") == 0) {
+        continue;
+      } else if (strcmp(input, "exit") == 0) {               
+        break;
+      } else {
+        parser_execute(input);
+      }
 
       free(input);
+
     }
   }
   cleanup_parsers();
