@@ -5,10 +5,10 @@
 #include "parser.h"
 
 mpc_parser_t* Integer; 
-mpc_parser_t* Identifier; 
-mpc_parser_t* Operator; 
 mpc_parser_t* Comment;
 mpc_parser_t* Expr; 
+mpc_parser_t* Term;
+mpc_parser_t* Factor; 
 mpc_parser_t* Alblang;
 
 void init() {
@@ -18,38 +18,52 @@ void init() {
 
 /* Creation of the Parsers */
 void create_parsers() {
-  Integer    = mpc_new("integer");
-  Identifier = mpc_new("identifier");
-  Operator   = mpc_new("operator");
+  Integer = mpc_new("integer");
   Comment = mpc_new("comment");
   Expr    = mpc_new("expr");
+  Term    = mpc_new("term");
+  Factor  = mpc_new("factor");
   Alblang = mpc_new("alblang");
 
   /* Define them with the following Language */
   mpca_lang(MPCA_LANG_DEFAULT,
-    "                                                                                   \
-      integer  : /[0-9]+/ ;                                                             \
-      identifier  : /[a-zA-Z]+/ ;                                                       \
-      operator  : /[+\\-*\\/=<>!&]+/ ;                                                  \
-      comment : /#[^\\r\\n]*/ ;                                                         \
-      expr    : '(' <expr>* ')' | <integer>  | <identifier> | <comment> | <operator>;   \
-      alblang : /^/ <expr>* /$/ ;                                                       \
-    ",
-    Integer, Identifier, Operator, Comment, Expr, Alblang);
+    "  integer  : /[0-9]+/ ;                                 "
+    "  comment : /#[^\\r\\n]*/ ;                             "
+    "  expr    : <term> (('+' | '-') <term>)* ;        "
+    "  term    : <factor> (('*' | '/') <factor>)* ;    "
+    "  factor  : '(' <expr> ')' | <integer> ;                "
+    "  alblang : /^/ <expr> /$/ ;                            ",
+    Integer, Comment, Expr, Term, Factor, Alblang);
 }
 
 void parser_execute(char* input) {
   mpc_result_t r;
-    if (mpc_parse("<stdin>", input, Alblang, &r)) {            
+    if (mpc_parse("input", input, Alblang, &r)) {            
       // print the parser tree
       mpc_ast_print(r.output);
+
+      /* Load AST from output */
+      /*mpc_ast_t* a = r.output;
+      printf("Tag: %s\n", a->tag);
+      printf("Contents: %s\n", a->contents);
+      printf("Number of children: %i\n", a->children_num);*/
+
+      /* Get First Child */
+      /*mpc_ast_t* c0 = a->children[0];
+      printf("First Child Tag: %s\n", c0->tag);
+      printf("First Child Contents: %s\n", c0->contents);
+      printf("First Child Number of children: %i\n", c0->children_num);*/
       
+      //long result = eval(r.output);
+      //printf("%li\n", result);
+
       mpc_ast_delete(r.output);
     } else {
       mpc_err_print(r.error);
       mpc_err_delete(r.error);
     }
 }
+
 void parser_execute_file(char* file_name) {
   mpc_result_t r;
   if (mpc_parse_contents(file_name, Alblang, &r)) {
@@ -63,5 +77,33 @@ void parser_execute_file(char* file_name) {
 
 /* Undefine and Delete our Parsers */
 void cleanup_parsers() {
-  mpc_cleanup(6, Integer, Identifier, Operator, Comment, Expr, Alblang);
+  mpc_cleanup(6, Integer, Comment, Expr, Term, Factor, Alblang);
+}
+
+long eval(mpc_ast_t* t) {
+  
+  if (strstr(t->tag, "integer")) { 
+    return atoi(t->contents); 
+  }
+
+  long x = eval(t->children[1]);
+  
+  char* op = t->children[2]->contents;
+    
+  int i = 3;
+  while (strstr(t->children[i]->tag, "expr")) {
+    x = eval_op(x, op, eval(t->children[i]));
+    i++;
+  }
+  
+  return x;  
+}
+
+/* Use operator string to see which operation to perform */
+long eval_op(long x, char* op, long y) {
+  if (strcmp(op, "+") == 0) { return x + y; }
+  if (strcmp(op, "-") == 0) { return x - y; }
+  if (strcmp(op, "*") == 0) { return x * y; }
+  if (strcmp(op, "/") == 0) { return x / y; }
+  return 0;
 }

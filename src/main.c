@@ -19,9 +19,9 @@ int main(int argc, char** argv) {
   } else {    
     while(1) {
       char* input = readline(":>  ");
-
+      puts("add_history....");
       add_history(input);
-      
+      puts("parser_execute....");
       parser_execute(input);
 
       free(input);

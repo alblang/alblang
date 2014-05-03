@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 extern mpc_parser_t* Integer; 
-extern mpc_parser_t* Identifier; 
 extern mpc_parser_t* Operator; 
 extern mpc_parser_t* Comment;
 extern mpc_parser_t* Expr; 
@@ -13,3 +12,6 @@ void create_parsers();
 void parser_execute(char* input);
 void parser_execute_file(char* file_name);
 void cleanup_parsers();
+
+long eval(mpc_ast_t* t);
+long eval_op(long x, char* op, long y);
