@@ -1,3 +1,7 @@
+/*
+ * Parser, grammar and front-end of Alblang
+ */ 
+
 #include <stdio.h>
 #include <stdlib.h>
 
