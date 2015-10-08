@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Alblang is a programming language
-# Copyright (C) 2013 Jesús Navarrete <jenaiz@alblang.org>
+# Copyright (C) 2013-2015 Jesús Navarrete <jenaiz@alblang.org>
 # 
 # This program is free software; you can redistribute it and/or modify it under 
 # the terms of the GNU General Public License as published by the Free Software 
