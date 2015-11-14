@@ -1,0 +1,7 @@
+; Definition of:
+;   true, false, nil
+
+; Special methods for list:
+;  head, tail, first, second, last, join, contains, size
+
+;
