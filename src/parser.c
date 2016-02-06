@@ -1,18 +1,18 @@
 /*
  * Parser, grammar and front-end of Alblang
- */ 
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "mpc.h"
+#include "parser/mpc.h"
 #include "parser.h"
 
-mpc_parser_t* Integer; 
+mpc_parser_t* Integer;
 mpc_parser_t* Comment;
-mpc_parser_t* Expr; 
+mpc_parser_t* Expr;
 mpc_parser_t* Term;
-mpc_parser_t* Factor; 
+mpc_parser_t* Factor;
 mpc_parser_t* Alblang;
 
 void init() {
@@ -42,10 +42,10 @@ void create_parsers() {
 
 void parser_execute(char* input) {
   mpc_result_t r;
-    if (mpc_parse("input", input, Alblang, &r)) {            
+    if (mpc_parse("input", input, Alblang, &r)) {
       // print the parser tree
       mpc_ast_print(r.output);
-      
+
       //long result = eval(r.output);
       //printf("%li\n", result);
 
@@ -73,22 +73,22 @@ void cleanup_parsers() {
 }
 
 long eval(mpc_ast_t* t) {
-  
-  if (strstr(t->tag, "integer")) { 
-    return atoi(t->contents); 
+
+  if (strstr(t->tag, "integer")) {
+    return atoi(t->contents);
   }
 
   long x = eval(t->children[1]);
-  
+
   char* op = t->children[2]->contents;
-    
+
   int i = 3;
   while (strstr(t->children[i]->tag, "expr")) {
     x = eval_op(x, op, eval(t->children[i]));
     i++;
   }
-  
-  return x;  
+
+  return x;
 }
 
 /* Use operator string to see which operation to perform */

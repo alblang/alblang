@@ -2,10 +2,10 @@
 
 CFLAGS=-std=c99 -Wall
 LFLAGS=-ledit -lm
-LIBS=parser.c mpc.c
+LIBS=parser.c parser/mpc.c
 SOURCES=main.c
 
-all: clean 
+all: clean
 	$(CC) $(CFLAGS) main.c $(LIBS) $(LFLAGS) -o ../alblang
 
 clean:

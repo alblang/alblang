@@ -25,6 +25,7 @@ test:
 
 clean:
 	@$(MAKE) clean -C src
-
+	rm alblang
+	
 launch:
 	./bin/alblang
